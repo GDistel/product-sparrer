@@ -10,7 +10,7 @@ ALLOWED_HOSTS = [
     'product-sparrer.herokuapp.com',
 ]
 
-DEBUG = False
+DEBUG = True
 SECURE_SSL_REDIRECT = True
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
