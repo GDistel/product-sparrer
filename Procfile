@@ -1,1 +1,1 @@
-web: gunicorn product-sparrer.wsgi
+web: gunicorn product_sparrer.wsgi
