@@ -6,7 +6,9 @@ DATABASES['default'].update(db_from_env)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'product-sparrer.herokuapp.com',
+]
 
 DEBUG = False
 SECURE_SSL_REDIRECT = True
