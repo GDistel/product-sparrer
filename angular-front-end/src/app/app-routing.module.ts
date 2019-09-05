@@ -5,12 +5,10 @@ const routes: Routes = [
   {
     path: 'tickets',
     loadChildren: './tickets/tickets.module#TicketsModule',
-    // loadChildren: () => import('./tickets/tickets-routing.module').then(m => m.TicketsRoutingModule),
   },
   {
     path: '',
-    redirectTo: '',
-    pathMatch: 'full'
+    loadChildren: './tickets/tickets.module#TicketsModule',
   }
 ];
 
