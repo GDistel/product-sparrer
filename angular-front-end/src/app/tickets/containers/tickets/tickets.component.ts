@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { TicketsService } from '../../api/tickets.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { Observable } from 'rxjs';
+import { TicketsFacade } from '../../tickets.facade';
+import { Ticket } from '../../models/ticket.model';
 
 @Component({
   selector: 'app-tickets',
@@ -8,18 +11,18 @@ import { TicketsService } from '../../api/tickets.service';
 })
 export class TicketsComponent implements OnInit {
 
-  tickets: any;
+  @Input() tickets$: Ticket[];
+  isUpdating$: Observable<boolean>;
 
-  constructor(private ticketsService: TicketsService) { }
+  constructor(private ticketsFacade: TicketsFacade) {
+    this.isUpdating$ = ticketsFacade.isUpdating$();
+  }
 
   ngOnInit() {
-    this.getTickets();
+    this.ticketsFacade.getTickets$().subscribe(tickets => this.tickets$ = tickets);
+    this.ticketsFacade.loadTickets();
   }
 
-  getTickets() {
-    this.ticketsService.getTickets().subscribe(data => {
-      this.tickets = data.results;
-    });
-  }
+
 
 }

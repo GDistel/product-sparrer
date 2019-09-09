@@ -5,6 +5,9 @@ import { SharedModule } from '../shared/shared.module';
 import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketsComponent } from './containers/tickets/tickets.component';
 import { TicketsService } from './api/tickets.service';
+import { TicketsState } from './state/tickets.state';
+import { TicketsFacade } from './tickets.facade';
+
 
 
 @NgModule({
@@ -16,7 +19,11 @@ import { TicketsService } from './api/tickets.service';
   declarations: [
     TicketsComponent,
   ],
-  providers: [TicketsService],
+  providers: [
+    TicketsService,
+    TicketsFacade,
+    TicketsState,
+  ],
   entryComponents: []
 })
 export class TicketsModule { }
