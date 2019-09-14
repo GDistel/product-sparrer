@@ -13,6 +13,7 @@ export class TicketsComponent implements OnInit {
 
   @Input() tickets$: Ticket[];
   isUpdating$: Observable<boolean>;
+  displayedColumns: string[] = ["type", "status", "subject", "body", "actions"];
 
   constructor(private ticketsFacade: TicketsFacade) {
     this.isUpdating$ = ticketsFacade.isUpdating$();
