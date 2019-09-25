@@ -35,13 +35,17 @@ export class TicketsComponent implements OnInit {
       data: data,
       autoFocus: false,
     });
-
     return dialogRef
   }
 
-  deleteTicket(): void{
+  deleteTicket(id): void{
     const data = { action: 'delete', item: 'ticket' };
     const dialogRef = this.openDialog(ConfirmationPromptComponent, data);
+    dialogRef.afterClosed().subscribe(result =>
+      result === data.action?
+        this.ticketsFacade.deleteTicket(id):
+        null
+    );
   }
 
 

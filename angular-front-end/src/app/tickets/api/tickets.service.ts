@@ -19,4 +19,8 @@ export class TicketsService {
     return this.http.get<any>(this.serviceUrl, {headers: this.httpHeaders});
   }
 
+  deleteTicket(id): Observable<any> {
+    return this.http.delete(this.serviceUrl + id, {headers: this.httpHeaders});
+  }
+
 }

@@ -17,6 +17,5 @@
 .create-button{
   position: fixed;
   top: 90vh;
-  right: 50%;
-  left: 50%;
+  right: calc((100vw - 56px) / 2);
 }

@@ -26,4 +26,8 @@ export class TicketsFacade{
       .subscribe(tickets => this.ticketsState.setTickets(tickets.results));
   }
 
+  deleteTicket(id){
+    this.ticketsService.deleteTicket(id)
+  }
+
 }

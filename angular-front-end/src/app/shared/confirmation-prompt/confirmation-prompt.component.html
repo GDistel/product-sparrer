@@ -3,5 +3,11 @@
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="8px">
   <button mat-button color="primary" (click)="cancel()">CANCEL</button>
-  <button mat-button color="primary">ACCEPT</button>
+  <button
+    mat-button
+    [mat-dialog-close]="data.action"
+    cdkFocusInitial
+    color="primary">
+    ACCEPT
+  </button>
 </div>
