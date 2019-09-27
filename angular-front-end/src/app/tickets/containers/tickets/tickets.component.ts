@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { TicketsFacade } from '../../tickets.facade';
 import { Ticket } from '../../models/ticket.model';
 import { ConfirmationPromptComponent } from 'src/app/shared/confirmation-prompt/confirmation-prompt.component';
+import { EditTicketComponent } from '../../components/edit-ticket/edit-ticket.component';
 
 @Component({
   selector: 'app-tickets',
@@ -24,18 +25,28 @@ export class TicketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ticketsFacade.getTickets$().subscribe(tickets => this.tickets$ = tickets);
+    this.ticketsFacade.getTickets$().subscribe(tickets =>
+      this.tickets$ = tickets
+    );
     this.ticketsFacade.loadTickets();
   }
 
   openDialog(component: any, data?: any){
     const dialogRef = this.dialog.open(component, {
-      minWidth: '40%',
-      maxWidth: '80%',
+      minWidth: '30%',
+      maxWidth: '50%',
       data: data,
       autoFocus: false,
     });
     return dialogRef
+  }
+
+  createTicket(): void{
+    const data = { action: 'create' };
+    const dialogRef = this.openDialog(EditTicketComponent, data);
+    dialogRef.afterClosed().subscribe(result =>
+      console.log(result)
+    );
   }
 
   deleteTicket(id): void{

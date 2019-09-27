@@ -7,7 +7,7 @@ import { TicketsComponent } from './containers/tickets/tickets.component';
 import { TicketsService } from './api/tickets.service';
 import { TicketsState } from './state/tickets.state';
 import { TicketsFacade } from './tickets.facade';
-
+import { EditTicketComponent } from './components/edit-ticket/edit-ticket.component';
 
 
 @NgModule({
@@ -18,12 +18,13 @@ import { TicketsFacade } from './tickets.facade';
   ],
   declarations: [
     TicketsComponent,
+    EditTicketComponent,
   ],
   providers: [
     TicketsService,
     TicketsFacade,
     TicketsState,
   ],
-  entryComponents: []
+  entryComponents: [EditTicketComponent]
 })
 export class TicketsModule { }

@@ -1,0 +1,47 @@
+<div mat-dialog-title>
+  {{ data.action | titlecase }} ticket
+</div>
+<div mat-dialog-content>
+  <form [formGroup]="form" novalidate >
+    <mat-form-field>
+      <mat-select formControlName="type" placeholder="Type" required>
+        <mat-option *ngFor="let type of types" [value]="type">
+          {{ type }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="status" placeholder="Status" required>
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Subject" formControlName="subject" required>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea
+      matInput
+      required
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="2"
+      cdkAutosizeMaxRows="15"
+      placeholder="Body"
+      formControlName="body">
+      </textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="8px">
+  <button mat-button color="primary" (click)="cancel()">CANCEL</button>
+  <button
+    mat-button
+    [disabled]="!form.valid"
+    [mat-dialog-close]="form.value"
+    cdkFocusInitial
+    color="primary">
+    ACCEPT
+  </button>
+</div>

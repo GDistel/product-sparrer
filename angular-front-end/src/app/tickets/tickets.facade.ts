@@ -27,7 +27,7 @@ export class TicketsFacade{
   }
 
   deleteTicket(id){
-    this.ticketsService.deleteTicket(id)
+    this.ticketsService.deleteTicket(id);
   }
 
 }
