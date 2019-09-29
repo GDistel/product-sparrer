@@ -25,7 +25,7 @@ export class TicketsState{
   }
 
   updateDeleted(id: number){
-    let updatedTickets = this.tickets$.getValue().filter(ticket =>
+    let updatedTickets: Ticket[] = this.tickets$.getValue().filter(ticket =>
       ticket.id !== id
     );
     this.setTickets(updatedTickets);

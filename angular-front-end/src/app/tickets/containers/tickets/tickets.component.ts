@@ -25,9 +25,6 @@ export class TicketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.ticketsFacade.getTickets$().subscribe(tickets =>
-    //   {this.tickets$.next(tickets); console.log(tickets)}
-    // );
     this.tickets$ = this.ticketsFacade.getTickets$();
     this.ticketsFacade.loadTickets();
   }
@@ -45,12 +42,15 @@ export class TicketsComponent implements OnInit {
   createTicket(): void{
     const data = { action: 'create' };
     const dialogRef = this.openDialog(EditTicketComponent, data);
-    dialogRef.afterClosed().subscribe(result =>
-      console.log(result)
-    );
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        this.ticketsFacade.createTicket(result);
+        this.ticketsFacade.loadTickets()
+      }
+    });
   }
 
-  deleteTicket(id): void{
+  deleteTicket(id: number): void{
     const data = { action: 'delete', item: 'ticket' };
     const dialogRef = this.openDialog(ConfirmationPromptComponent, data);
     dialogRef.afterClosed().subscribe(result =>

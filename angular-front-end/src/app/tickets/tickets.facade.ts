@@ -21,14 +21,19 @@ export class TicketsFacade{
     return this.ticketsState.getTickets$();
   }
 
-  loadTickets() {
+  loadTickets(): void{
     this.ticketsService.getTickets()
-      .subscribe(tickets => this.ticketsState.setTickets(tickets.results));
+      .subscribe(tickets => this.ticketsState.setTickets(tickets.results))
   }
 
-  deleteTicket(id){
+  deleteTicket(id: number): void{
     this.ticketsService.deleteTicket(id)
       .subscribe( _ => this.ticketsState.updateDeleted(id));
+  }
+
+  createTicket(ticket: Ticket): void{
+    this.ticketsService.createTicket(ticket)
+      .subscribe();
   }
 
 }

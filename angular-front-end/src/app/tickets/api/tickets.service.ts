@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TESTTOKEN } from 'client_secrets';
+import { Ticket } from '../models/ticket.model';
 
 
 @Injectable()
@@ -16,11 +17,15 @@ export class TicketsService {
   constructor(private http: HttpClient) { }
 
   getTickets(): Observable<any>{
-    return this.http.get<any>(this.serviceUrl, {headers: this.httpHeaders});
+    return this.http.get<Ticket[]>(this.serviceUrl, {headers: this.httpHeaders})
   }
 
-  deleteTicket(id): Observable<any> {
-    return this.http.delete(this.serviceUrl + id, {headers: this.httpHeaders});
+  createTicket(ticket: Ticket): Observable<any>{
+    return this.http.post(this.serviceUrl, JSON.stringify(ticket), {headers: this.httpHeaders})
+  }
+
+  deleteTicket(id: number): Observable<any> {
+    return this.http.delete(this.serviceUrl + id, {headers: this.httpHeaders})
   }
 
 }
