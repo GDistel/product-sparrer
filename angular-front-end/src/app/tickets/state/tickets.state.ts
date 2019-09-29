@@ -24,4 +24,11 @@ export class TicketsState{
     this.tickets$.next(tickets);
   }
 
+  updateDeleted(id: number){
+    let updatedTickets = this.tickets$.getValue().filter(ticket =>
+      ticket.id !== id
+    );
+    this.setTickets(updatedTickets);
+  }
+
 }

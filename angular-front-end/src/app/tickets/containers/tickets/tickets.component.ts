@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { TicketsFacade } from '../../tickets.facade';
 import { Ticket } from '../../models/ticket.model';
 import { ConfirmationPromptComponent } from 'src/app/shared/confirmation-prompt/confirmation-prompt.component';
@@ -13,7 +13,7 @@ import { EditTicketComponent } from '../../components/edit-ticket/edit-ticket.co
 })
 export class TicketsComponent implements OnInit {
 
-  @Input() tickets$: Ticket[];
+  tickets$: Observable<Ticket[]>;
   isUpdating$: Observable<boolean>;
   displayedColumns: string[] = ["type", "status", "subject", "body", "actions"];
 
@@ -25,9 +25,10 @@ export class TicketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ticketsFacade.getTickets$().subscribe(tickets =>
-      this.tickets$ = tickets
-    );
+    // this.ticketsFacade.getTickets$().subscribe(tickets =>
+    //   {this.tickets$.next(tickets); console.log(tickets)}
+    // );
+    this.tickets$ = this.ticketsFacade.getTickets$();
     this.ticketsFacade.loadTickets();
   }
 
