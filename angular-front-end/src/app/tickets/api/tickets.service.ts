@@ -24,6 +24,10 @@ export class TicketsService {
     return this.http.post(this.serviceUrl, JSON.stringify(ticket), {headers: this.httpHeaders})
   }
 
+  updateTicket(id: number, ticket: Ticket): Observable<any>{
+    return this.http.put(this.serviceUrl + id + '/', ticket, {headers: this.httpHeaders})
+  }
+
   deleteTicket(id: number): Observable<any> {
     return this.http.delete(this.serviceUrl + id, {headers: this.httpHeaders})
   }

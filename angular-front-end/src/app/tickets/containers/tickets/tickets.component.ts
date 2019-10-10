@@ -45,7 +45,16 @@ export class TicketsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result){
         this.ticketsFacade.createTicket(result);
-        this.ticketsFacade.loadTickets()
+      }
+    });
+  }
+
+  updateTicket(ticket: Ticket): void{
+    const data = { action: 'update', ticket: ticket };
+    const dialogRef = this.openDialog(EditTicketComponent, data);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        this.ticketsFacade.updateTicket(ticket.id, result);
       }
     });
   }

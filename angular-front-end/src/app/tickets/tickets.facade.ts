@@ -33,7 +33,12 @@ export class TicketsFacade{
 
   createTicket(ticket: Ticket): void{
     this.ticketsService.createTicket(ticket)
-      .subscribe();
+      .subscribe( _ => this.loadTickets());
+  }
+
+  updateTicket(id: number, ticket: Ticket): void{
+    this.ticketsService.updateTicket(id,ticket)
+      .subscribe( _ => this.loadTickets());
   }
 
 }

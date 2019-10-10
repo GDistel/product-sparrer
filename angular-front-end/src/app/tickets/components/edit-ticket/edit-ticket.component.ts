@@ -18,12 +18,26 @@ export class EditTicketComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      type: new FormControl(),
-      status: new FormControl(),
-      subject: new FormControl(),
-      body: new FormControl(),
-    })
+    this.populateForm();
+  }
+
+  private populateForm(){
+    let ticket = this.data.ticket;
+    if (ticket){
+      this.form = new FormGroup({
+        type: new FormControl(ticket.type),
+        status: new FormControl(ticket.status),
+        subject: new FormControl(ticket.subject),
+        body: new FormControl(ticket.body),
+      })
+    } else {
+      this.form = new FormGroup({
+        type: new FormControl(),
+        status: new FormControl(),
+        subject: new FormControl(),
+        body: new FormControl(),
+      })
+    }
   }
 
   private cancel(){
