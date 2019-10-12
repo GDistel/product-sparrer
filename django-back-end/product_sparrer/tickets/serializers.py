@@ -9,11 +9,3 @@ class TicketsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TicketsModel
         fields = ('owner', 'id', 'url', 'type', 'status', 'subject', 'body')
-
-
-class UserSerializer(serializers.ModelSerializer):
-    tickets = serializers.PrimaryKeyRelatedField(many=True, queryset=TicketsModel.objects.all())
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'tickets')

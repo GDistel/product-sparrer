@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib import auth
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from product_sparrer.settings.base import AUTH_USER_MODEL
 
 class TicketsModel(models.Model):
     TICKET_TYPE = (
@@ -15,7 +16,7 @@ class TicketsModel(models.Model):
         ('Draft', 'Draft'),
     )
 
-    owner = models.ForeignKey('auth.User', related_name='tickets', on_delete=models.CASCADE)
+    owner = models.ForeignKey(AUTH_USER_MODEL, related_name='tickets', on_delete=models.CASCADE)
     type = models.CharField(max_length=20, unique=False, choices=TICKET_TYPE)
     status = models.CharField(max_length=10, unique=False, choices=TICKET_STATUS)
     subject = models.CharField(max_length=20, unique=True, blank=False, help_text="e.g. Academy Ticket 'S8'")
