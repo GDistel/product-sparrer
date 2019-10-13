@@ -5,6 +5,7 @@ import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ConfirmationPromptComponent } from './confirmation-prompt/confirmation-prompt.component';
+import { TopNavComponent } from './top-nav/top-nav.component';
 
 
 @NgModule({
@@ -18,9 +19,11 @@ import { ConfirmationPromptComponent } from './confirmation-prompt/confirmation-
     ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
+    TopNavComponent
   ],
   declarations: [
     ConfirmationPromptComponent,
+    TopNavComponent,
   ],
   entryComponents: [
     ConfirmationPromptComponent,

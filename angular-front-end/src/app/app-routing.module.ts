@@ -3,13 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: './login/login.module#LoginModule',
+  },
+  {
     path: 'tickets',
     loadChildren: './tickets/tickets.module#TicketsModule',
   },
-  {
-    path: '',
-    loadChildren: './tickets/tickets.module#TicketsModule',
-  }
 ];
 
 @NgModule({
