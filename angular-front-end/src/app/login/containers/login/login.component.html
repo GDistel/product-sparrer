@@ -8,6 +8,9 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <p class="invalid-credentials" *ngIf="invalidCredentials">
+        Invalid credentials
+      </p>
       <form [formGroup]="form" novalidate>
         <mat-form-field>
           <input
@@ -27,7 +30,7 @@
       </form>
     </mat-card-content>
     <mat-card-actions fxLayout="row" fxLayoutAlign="center">
-      <button mat-raised-button color="primary">Login</button>
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
     </mat-card-actions>
   </mat-card>
 </div>
