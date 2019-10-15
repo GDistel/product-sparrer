@@ -1,8 +1,19 @@
-<mat-toolbar color="primary" class="mat-elevation-z4" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar
+  color="primary"
+  class="mat-elevation-z4"
+  fxLayout="row"
+  fxLayoutAlign="space-between center">
     <div>
       Product Sparrer
     </div>
-    <div>
-      user@user.com
+    <div
+      *ngIf="user"
+      fxLayout="row"
+      fxLayoutGap="8px"
+      fxLayoutAlign="center center">
+      <div> {{ user }} </div>
+      <button mat-icon-button (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
     </div>
 </mat-toolbar>

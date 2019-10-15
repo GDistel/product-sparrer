@@ -8,6 +8,7 @@ export class AuthGuardService implements CanActivate{
   constructor(public loginState: LoginState) {}
 
   canActivate(): boolean {
+    console.log(this.loginState.loggedIn$.value)
     return this.loginState.loggedIn$.value
   }
 }

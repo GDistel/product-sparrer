@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class LoginState{
   public loggedIn$ = new BehaviorSubject<boolean>(false);
   public validCredentials$ = new BehaviorSubject<boolean>(true);
+  public authToken: any;
+  public user: User;
 
   isLoggedIn$(): Observable<boolean>{
     return this.loggedIn$.asObservable()

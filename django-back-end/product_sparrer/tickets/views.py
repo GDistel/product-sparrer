@@ -12,3 +12,6 @@ class TicketsViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        return TicketsModel.objects.filter(owner=self.request.user)

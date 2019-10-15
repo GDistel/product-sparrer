@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoginFacade } from '../../login.facade';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void{
-    let user = this.form.value;
+    let user: User = this.form.value;
     this.loginFacade.login(user);
   }
 

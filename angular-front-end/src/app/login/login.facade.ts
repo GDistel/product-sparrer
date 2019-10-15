@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './api/auth.service';
 import { LoginState } from './state/login.state';
 import { Observable } from 'rxjs';
+import { User } from './models/user.model';
 
 @Injectable()
 export class LoginFacade{
@@ -11,9 +12,9 @@ export class LoginFacade{
     private loginState: LoginState
   ) { }
 
-  login(user: any): void{
+  login(user: User): void{
     this.authService.login(user).subscribe(
-      data => this.setSession(data['token']),
+      data => this.setSession(data['token'], user),
       err => {
         this.logout();
         this.loginState.setCredentialsValidity(false)
@@ -26,9 +27,12 @@ export class LoginFacade{
     this.loginState.setLogIn(false)
   }
 
-  setSession(authResult: any): void {
-    localStorage.setItem('id_token', `Token ${authResult}`);
-    this.loginState.setLogIn(true)
+  setSession(authResult: any, user: User): void {
+    let token = `Token ${authResult}`;
+    localStorage.setItem('id_token', token );
+    this.loginState.setLogIn(true);
+    this.loginState.authToken = token;
+    this.loginState.user = user;
   }
 
   isLoggedIn$(): Observable<boolean> {

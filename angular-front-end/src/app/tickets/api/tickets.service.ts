@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TESTTOKEN } from 'client_secrets';
 import { Ticket } from '../models/ticket.model';
+import { LoginState } from '../../login/state/login.state';
 
 
 @Injectable()
@@ -11,10 +12,13 @@ export class TicketsService {
 
   httpHeaders = new HttpHeaders({
     'Content-type': 'application/json',
-    'Authorization': TESTTOKEN,
+    'Authorization': this.loginState.authToken,
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private loginState: LoginState
+  ) { }
 
   getTickets(): Observable<any>{
     return this.http.get<Ticket[]>(this.serviceUrl, {headers: this.httpHeaders})

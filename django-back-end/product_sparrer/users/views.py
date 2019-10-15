@@ -9,4 +9,4 @@ class UsersViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def perform_create(self, serializer):
-        serializer.save(tickets=[], password=make_password(self.request.data.get("password")))
+        serializer.save(password=make_password(self.request.data.get("password")))
