@@ -8,7 +8,7 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p class="invalid-credentials" *ngIf="invalidCredentials">
+      <p class="invalid-credentials" *ngIf="!validCredentials">
         Invalid credentials
       </p>
       <form [formGroup]="form" novalidate>

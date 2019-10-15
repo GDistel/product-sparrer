@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService as AuthGuard } from 'src/app/core/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -9,7 +10,12 @@ const routes: Routes = [
   {
     path: 'tickets',
     loadChildren: './tickets/tickets.module#TicketsModule',
+    canActivate: [AuthGuard]
   },
+  {
+    path: '**',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({

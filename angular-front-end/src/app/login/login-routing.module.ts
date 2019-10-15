@@ -5,7 +5,7 @@ import { LoginComponent } from './containers/login/login.component';
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
   },
 ];
 

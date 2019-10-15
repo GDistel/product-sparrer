@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { AuthService } from '../../api/auth.service';
+import { LoginFacade } from '../../login.facade';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +11,10 @@ import { AuthService } from '../../api/auth.service';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   loggedIn: boolean;
-  invalidCredentials: boolean;
+  validCredentials: boolean;
 
   constructor(
-    private authService: AuthService,
+    private loginFacade: LoginFacade,
     private router: Router
   ) { }
 
@@ -23,20 +23,28 @@ export class LoginComponent implements OnInit {
       username: new FormControl(),
       password: new FormControl(),
     }),
-    this.authService.loggedIn.subscribe( status => {
+    this.isLoggedIn(),
+    this.checkCredentials()
+  }
+
+  login(): void{
+    let user = this.form.value;
+    this.loginFacade.login(user);
+  }
+
+  isLoggedIn(): void{
+    this.loginFacade.isLoggedIn$().subscribe( status => {
       this.loggedIn = status;
       this.loggedIn?
         this.router.navigate(['tickets']):
         null
-    }),
-    this.authService.invalidCredentials.subscribe( res =>
-      this.invalidCredentials = res
-    )
+    })
   }
 
-  login(){
-    let user = this.form.value;
-    this.authService.login(user);
+  checkCredentials(): void{
+    this.loginFacade.areCredentialsValid$().subscribe( res =>
+      this.validCredentials = res
+    )
   }
 
 }
