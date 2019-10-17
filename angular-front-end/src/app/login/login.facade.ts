@@ -24,12 +24,16 @@ export class LoginFacade{
 
   logout(): void {
     localStorage.removeItem('id_token');
-    this.loginState.setLogIn(false)
+    localStorage.removeItem('user');
+    this.loginState.setLogIn(false);
+    this.loginState.authToken = '';
+    this.loginState.user = undefined;
   }
 
   setSession(authResult: any, user: User): void {
     let token = `Token ${authResult}`;
     localStorage.setItem('id_token', token );
+    localStorage.setItem('user', JSON.stringify(user) );
     this.loginState.setLogIn(true);
     this.loginState.authToken = token;
     this.loginState.user = user;

@@ -23,6 +23,7 @@ export class TopNavComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('user');
     this.loginState.setLogIn(false);
     this.router.navigate(['']);
   }

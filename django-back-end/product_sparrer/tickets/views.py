@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.authtoken.models import Token
 from product_sparrer.tickets.serializers import TicketsSerializer
 from .models import TicketsModel
 
@@ -14,4 +15,7 @@ class TicketsViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
-        return TicketsModel.objects.filter(owner=self.request.user)
+        # token = self.request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+        # user = Token.objects.get(key=token).user
+        user = self.request.user
+        return TicketsModel.objects.filter(owner=user)
