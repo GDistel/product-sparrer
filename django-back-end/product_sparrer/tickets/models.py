@@ -24,3 +24,11 @@ class TicketsModel(models.Model):
 
     def __str__(self):
         return self.subject
+
+class TicketsDeploymentModel(models.Model):
+    owner = models.ForeignKey(AUTH_USER_MODEL, related_name='deployments', on_delete=models.CASCADE)
+    destinatary = models.EmailField()
+    deploy = models.BooleanField(default=True)
+
+    def __str__(self):
+        return 'Deploy to {}'.format(self.destinatary)

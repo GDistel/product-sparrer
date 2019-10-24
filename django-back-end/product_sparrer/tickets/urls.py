@@ -8,6 +8,7 @@ schema_view = get_schema_view(title='Product-sparrer API')
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'tickets', views.TicketsViewSet)
+router.register(r'tickets_deployments', views.TicketsDeploymentViewSet)
 
 
 # The API URLs are now determined automatically by the router.
