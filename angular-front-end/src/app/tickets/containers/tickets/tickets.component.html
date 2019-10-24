@@ -4,6 +4,10 @@
   <mat-icon>add</mat-icon>
 </button>
 
+<button mat-fab class="deploy-button" (click)="deployTickets()" color="warn">
+  <mat-icon>email</mat-icon>
+</button>
+
 <div class="table-wrapper">
 
   <table mat-table [dataSource]="tickets$ | async" class="mat-elevation-z8">

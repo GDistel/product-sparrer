@@ -8,6 +8,7 @@ import { TicketsService } from './api/tickets.service';
 import { TicketsState } from './state/tickets.state';
 import { TicketsFacade } from './tickets.facade';
 import { EditTicketComponent } from './components/edit-ticket/edit-ticket.component';
+import { DeployTicketsComponent } from './components/deploy-tickets/deploy-tickets.component';
 
 
 @NgModule({
@@ -19,12 +20,16 @@ import { EditTicketComponent } from './components/edit-ticket/edit-ticket.compon
   declarations: [
     TicketsComponent,
     EditTicketComponent,
+    DeployTicketsComponent,
   ],
   providers: [
     TicketsService,
     TicketsFacade,
     TicketsState,
   ],
-  entryComponents: [EditTicketComponent]
+  entryComponents: [
+    EditTicketComponent,
+    DeployTicketsComponent
+  ]
 })
 export class TicketsModule { }

@@ -22,7 +22,6 @@ export class TicketsService {
   }
 
   getTickets(): Observable<any>{
-    console.log(this.getHeaders());
     return this.http.get<Ticket[]>(this.serviceUrl, {headers: this.getHeaders()})
   }
 

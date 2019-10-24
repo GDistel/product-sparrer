@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TicketsFacade } from '../../tickets.facade';
 import { Ticket } from '../../models/ticket.model';
 import { ConfirmationPromptComponent } from 'src/app/shared/confirmation-prompt/confirmation-prompt.component';
 import { EditTicketComponent } from '../../components/edit-ticket/edit-ticket.component';
+import { DeployTicketsComponent } from '../../components/deploy-tickets/deploy-tickets.component';
+
 
 @Component({
   selector: 'app-tickets',
@@ -45,6 +47,15 @@ export class TicketsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result){
         this.ticketsFacade.createTicket(result);
+      }
+    });
+  }
+
+  deployTickets(): void{
+    const dialogRef = this.openDialog(DeployTicketsComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result){
+        console.log(result);
       }
     });
   }

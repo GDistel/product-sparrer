@@ -1,0 +1,29 @@
+<div mat-dialog-title>Deploy tickets</div>
+<div mat-dialog-content>
+  <p *ngIf="!emails">You have not added any destinataries yet</p>
+  <form *ngIf="emails" [formGroup]="form" novalidate>
+    <mat-form-field>
+      <mat-label>Destinatary</mat-label>
+      <mat-select formControlName="destinatary" required>
+        <mat-option *ngFor="let email of emails" [value]="email">
+          {{ email }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  <p class="small-text">
+    <mat-icon inline color="warn">info</mat-icon>
+    Deployment will start right after you click "deploy"
+  </p>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="8px">
+  <button mat-button color="primary" (click)="cancel()">CANCEL</button>
+  <button
+    mat-button
+    [disabled]="!form.valid"
+    [mat-dialog-close]="form.value"
+    cdkFocusInitial
+    color="primary">
+    DEPLOY
+  </button>
+</div>
