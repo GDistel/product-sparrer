@@ -55,7 +55,7 @@ export class TicketsComponent implements OnInit {
     const dialogRef = this.openDialog(DeployTicketsComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result){
-        console.log(result);
+        this.ticketsFacade.deployTickets(result)
       }
     });
   }

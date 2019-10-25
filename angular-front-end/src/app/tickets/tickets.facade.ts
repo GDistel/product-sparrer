@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { TicketsService } from './api/tickets.service';
 import { TicketsState } from './state/tickets.state';
 import { Ticket } from './models/ticket.model';
+import { Deployment } from './models/deployment.model';
 
 
 @Injectable()
@@ -15,6 +16,20 @@ export class TicketsFacade{
 
   isUpdating$(): Observable<boolean> {
     return this.ticketsState.isUpdating$();
+  }
+
+  deployTickets(deployment: Deployment): void{
+    this.ticketsService.deployTickets(deployment)
+      .subscribe( _ => this.loadDeployments());
+  }
+
+  getDeployments$(): Observable<Deployment[]> {
+    return this.ticketsState.getDeployments$();
+  }
+
+  loadDeployments(): void{
+    this.ticketsService.getDeployments$()
+      .subscribe(deployments => this.ticketsState.setDeployments(deployments.results))
   }
 
   getTickets$(): Observable<Ticket[]> {
