@@ -9,6 +9,7 @@ import { TicketsState } from './state/tickets.state';
 import { TicketsFacade } from './tickets.facade';
 import { EditTicketComponent } from './components/edit-ticket/edit-ticket.component';
 import { DeployTicketsComponent } from './components/deploy-tickets/deploy-tickets.component';
+import { TicketDeploymentsComponent } from './containers/ticket-deployments/ticket-deployments.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { DeployTicketsComponent } from './components/deploy-tickets/deploy-ticke
     TicketsComponent,
     EditTicketComponent,
     DeployTicketsComponent,
+    TicketDeploymentsComponent,
   ],
   providers: [
     TicketsService,
