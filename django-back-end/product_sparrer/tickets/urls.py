@@ -10,9 +10,8 @@ router = DefaultRouter()
 router.register(r'tickets', views.TicketsViewSet)
 router.register(r'tickets_deployments', views.TicketsDeploymentViewSet)
 
-
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('', include(router.urls)),
-    path('schema/', schema_view),
+    path('schema/', schema_view)
 ]
