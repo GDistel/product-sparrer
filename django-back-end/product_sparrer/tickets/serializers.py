@@ -16,4 +16,4 @@ class TicketsDeploymentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TicketsDeploymentModel
-        fields = ('owner', 'url', 'destinatary','deploy',)
+        fields = ('owner', 'url', 'destinatary','deploy','created_at', 'updated_at')

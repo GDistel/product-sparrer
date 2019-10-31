@@ -29,6 +29,8 @@ class TicketsDeploymentModel(models.Model):
     owner = models.ForeignKey(AUTH_USER_MODEL, related_name='deployments', on_delete=models.CASCADE)
     destinatary = models.EmailField()
     deploy = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return 'Deploy to {}'.format(self.destinatary)

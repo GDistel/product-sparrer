@@ -32,3 +32,7 @@ class TicketsDeploymentViewSet(viewsets.ModelViewSet):
         request_user = self.request.user
         serializer.save(owner=request_user)
         deploy_tickets.apply_async([request_user.email, destinatary])
+
+    def get_queryset(self):
+        user = self.request.user
+        return TicketsDeploymentModel.objects.filter(owner=user).order_by('-id')
