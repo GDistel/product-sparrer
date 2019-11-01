@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./ticket-deployments.component.scss']
 })
 export class TicketDeploymentsComponent implements OnInit {
-  @ViewChild('refreshToast', { static: false }) refreshToast: TemplateRef<any>;
+  @ViewChild('refreshToast', { static: false }) refreshToastRef: TemplateRef<any>;
   deployments$: Observable<Deployment[]>;
 
   constructor(
@@ -21,7 +21,7 @@ export class TicketDeploymentsComponent implements OnInit {
 
   ngOnInit() {
     this.deployments$ = this.ticketsFacade.getDeployments$();
-    this.refresh();
+    this.ticketsFacade.loadDeployments();
   }
 
   refresh(): void{
@@ -30,7 +30,7 @@ export class TicketDeploymentsComponent implements OnInit {
   }
 
   openSnackBar(): void {
-    this._snackBar.openFromTemplate(this.refreshToast, {
+    this._snackBar.openFromTemplate(this.refreshToastRef, {
       duration: 2000,
     });
   }

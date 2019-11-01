@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { LoginModule } from '../login/login.module';
 import { AuthGuardService } from './auth-guard.service';
+import { LoggedInGuardService } from './logged-in-guard.service';
 
 @NgModule({
   declarations: [],
@@ -13,7 +14,8 @@ import { AuthGuardService } from './auth-guard.service';
     LoginModule
   ],
   providers: [
-    AuthGuardService
+    AuthGuardService,
+    LoggedInGuardService
   ]
 })
 export class CoreModule { }
