@@ -4,7 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { LoginFacade } from '../../login.facade';
 import { User } from '../../models/user.model';
 import { PreviousRouteService } from 'src/app/core/previous-route.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private previousRouteService: PreviousRouteService,
     private loginFacade: LoginFacade,
     private router: Router,
-    private snackBar: MatSnackBar,
+    private snackBarService: SnackBarService,
   ) { }
 
   ngOnInit() {
@@ -57,16 +57,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     )
   }
 
-  openSnackBar(targetSnackbar: TemplateRef<any>, delay: number): void {
-    this.snackBar.openFromTemplate(targetSnackbar, {
-      duration: delay,
-    });
-  }
-
   verifyLogout(): void {
     let previousUrl = this.previousRouteService.getPreviousUrl();
     if (previousUrl !== '/'){
-      this.openSnackBar(this.loggedOutToastRef, 4000)
+      this.snackBarService.openSnackBar(this.loggedOutToastRef, 4000)
     }
   }
 

@@ -7,7 +7,7 @@ import { ConfirmationPromptComponent } from 'src/app/shared/confirmation-prompt/
 import { EditTicketComponent } from '../../components/edit-ticket/edit-ticket.component';
 import { DeployTicketsComponent } from '../../components/deploy-tickets/deploy-tickets.component';
 import { PreviousRouteService } from 'src/app/core/previous-route.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-tickets',
@@ -25,7 +25,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     private previousRouteService: PreviousRouteService,
     private ticketsFacade: TicketsFacade,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
+    private snackBarService: SnackBarService,
   ) {
     this.isUpdating$ = ticketsFacade.isUpdating$();
   }
@@ -88,16 +88,10 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     );
   }
 
-  openSnackBar(targetSnackbar: TemplateRef<any>, delay: number): void {
-    this.snackBar.openFromTemplate(targetSnackbar, {
-      duration: delay,
-    });
-  }
-
   verifyRecentLogin(): void {
     let previousUrl = this.previousRouteService.getPreviousUrl();
     if (previousUrl === '/'){
-      this.openSnackBar(this.loggedInToastRef, 4000)
+      this.snackBarService.openSnackBar(this.loggedInToastRef, 4000)
     }
   }
 

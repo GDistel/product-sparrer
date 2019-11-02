@@ -2,8 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Deployment } from '../../models/deployment.model';
 import { TicketsFacade } from '../../tickets.facade';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-ticket-deployments',
@@ -16,7 +15,7 @@ export class TicketDeploymentsComponent implements OnInit {
 
   constructor(
     private ticketsFacade: TicketsFacade,
-    private snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) { }
 
   ngOnInit() {
@@ -30,9 +29,7 @@ export class TicketDeploymentsComponent implements OnInit {
   }
 
   openSnackBar(): void {
-    this.snackBar.openFromTemplate(this.refreshToastRef, {
-      duration: 2000,
-    });
+    this.snackBarService.openSnackBar(this.refreshToastRef, 2000);
   }
 
 }

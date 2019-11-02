@@ -7,7 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ConfirmationPromptComponent } from './confirmation-prompt/confirmation-prompt.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
-
+import { SnackBarService } from './snack-bar.service';
 
 @NgModule({
   imports: [
@@ -30,6 +30,9 @@ import { TopNavComponent } from './top-nav/top-nav.component';
   ],
   entryComponents: [
     ConfirmationPromptComponent,
+  ],
+  providers: [
+    SnackBarService
   ]
 })
 export class SharedModule { }
