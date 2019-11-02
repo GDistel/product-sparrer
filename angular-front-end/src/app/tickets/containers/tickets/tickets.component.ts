@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { TicketsFacade } from '../../tickets.facade';
@@ -6,22 +6,26 @@ import { Ticket } from '../../models/ticket.model';
 import { ConfirmationPromptComponent } from 'src/app/shared/confirmation-prompt/confirmation-prompt.component';
 import { EditTicketComponent } from '../../components/edit-ticket/edit-ticket.component';
 import { DeployTicketsComponent } from '../../components/deploy-tickets/deploy-tickets.component';
-
+import { PreviousRouteService } from 'src/app/core/previous-route.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss']
 })
-export class TicketsComponent implements OnInit {
+export class TicketsComponent implements OnInit, AfterViewInit {
+  @ViewChild('loggedInToast', { static: false }) loggedInToastRef: TemplateRef<any>;
 
   tickets$: Observable<Ticket[]>;
   isUpdating$: Observable<boolean>;
   displayedColumns: string[] = ["type", "status", "subject", "body", "actions"];
 
   constructor(
+    private previousRouteService: PreviousRouteService,
     private ticketsFacade: TicketsFacade,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {
     this.isUpdating$ = ticketsFacade.isUpdating$();
   }
@@ -29,6 +33,10 @@ export class TicketsComponent implements OnInit {
   ngOnInit() {
     this.tickets$ = this.ticketsFacade.getTickets$();
     this.ticketsFacade.loadTickets();
+  }
+
+  ngAfterViewInit(){
+    this.verifyRecentLogin();
   }
 
   openDialog(component: any, data?: any){
@@ -80,6 +88,17 @@ export class TicketsComponent implements OnInit {
     );
   }
 
+  openSnackBar(targetSnackbar: TemplateRef<any>, delay: number): void {
+    this.snackBar.openFromTemplate(targetSnackbar, {
+      duration: delay,
+    });
+  }
 
+  verifyRecentLogin(): void {
+    let previousUrl = this.previousRouteService.getPreviousUrl();
+    if (previousUrl === '/'){
+      this.openSnackBar(this.loggedInToastRef, 4000)
+    }
+  }
 
 }

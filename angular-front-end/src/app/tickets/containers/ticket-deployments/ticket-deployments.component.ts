@@ -16,7 +16,7 @@ export class TicketDeploymentsComponent implements OnInit {
 
   constructor(
     private ticketsFacade: TicketsFacade,
-    private _snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -30,7 +30,7 @@ export class TicketDeploymentsComponent implements OnInit {
   }
 
   openSnackBar(): void {
-    this._snackBar.openFromTemplate(this.refreshToastRef, {
+    this.snackBar.openFromTemplate(this.refreshToastRef, {
       duration: 2000,
     });
   }

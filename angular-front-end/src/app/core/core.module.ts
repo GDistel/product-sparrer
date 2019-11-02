@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginModule } from '../login/login.module';
 import { AuthGuardService } from './auth-guard.service';
 import { LoggedInGuardService } from './logged-in-guard.service';
+import { PreviousRouteService } from './previous-route.service';
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,8 @@ import { LoggedInGuardService } from './logged-in-guard.service';
   ],
   providers: [
     AuthGuardService,
-    LoggedInGuardService
+    LoggedInGuardService,
+    PreviousRouteService
   ]
 })
 export class CoreModule { }
