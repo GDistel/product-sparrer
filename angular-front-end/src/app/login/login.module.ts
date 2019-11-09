@@ -6,11 +6,12 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './containers/login/login.component';
 import { AuthService } from './api/auth.service';
 import { LoginFacade } from './login.facade';
-import { LoginState } from './state/login.state';
+import { CheckEmailComponent } from './components/check-email/check-email.component';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    CheckEmailComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +21,10 @@ import { LoginState } from './state/login.state';
   providers: [
     AuthService,
     LoginFacade,
+
+  ],
+  entryComponents: [
+    CheckEmailComponent
   ]
 })
 export class LoginModule { }

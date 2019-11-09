@@ -5,6 +5,8 @@ import { LoginFacade } from '../../login.facade';
 import { User } from '../../models/user.model';
 import { PreviousRouteService } from 'src/app/core/previous-route.service';
 import { SnackBarService } from 'src/app/shared/snack-bar.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CheckEmailComponent } from '../../components/check-email/check-email.component';
 
 @Component({
   selector: 'app-login',
@@ -16,17 +18,21 @@ export class LoginComponent implements OnInit, AfterViewInit {
   form: FormGroup;
   loggedIn: boolean;
   validCredentials: boolean;
+  registerContext: boolean = false;
+  userExists: boolean = false;
 
   constructor(
     private previousRouteService: PreviousRouteService,
     private loginFacade: LoginFacade,
     private router: Router,
     private snackBarService: SnackBarService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
       username: new FormControl(),
+      email: new FormControl(),
       password: new FormControl(),
     }),
     this.isLoggedIn(),
@@ -37,9 +43,34 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.verifyLogout();
   }
 
+  openDialog(component: any, data?: any){
+    const dialogRef = this.dialog.open(component, {
+      minWidth: '30%',
+      maxWidth: '50%',
+      data: data,
+      autoFocus: false,
+    });
+    return dialogRef
+  }
+
+  checkEmail(): void{
+    const dialogRef = this.openDialog(CheckEmailComponent);
+    dialogRef.afterClosed().subscribe( _  => { this.registerContext = false });
+  }
+
   login(): void{
     let user: User = this.form.value;
     this.loginFacade.login(user);
+  }
+
+  register(): void{
+    let newUser: User = this.form.value;
+    this.loginFacade.login(newUser);
+    if (!this.loggedIn){
+      this.loginFacade.register(newUser);
+      this.form.reset();
+      this.checkEmail();
+    }
   }
 
   isLoggedIn(): void{
@@ -53,7 +84,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   checkCredentials(): void{
     this.loginFacade.areCredentialsValid$().subscribe( res =>
-      this.validCredentials = res
+      this.registerContext?
+        this.validCredentials = true:
+        this.validCredentials = res
     )
   }
 

@@ -4,11 +4,13 @@
   <mat-card class="mat-elevation-z4">
     <mat-card-header>
       <mat-card-title>
-        Welcome to Product Sparrer
+        <span
+          [innerHTML]="registerContext? 'Register for a new account': 'Welcome to Product Sparrer'">
+        </span>
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p class="invalid-credentials" *ngIf="!validCredentials">
+      <p class="invalid-credentials" *ngIf="!validCredentials && !registerContext">
         Invalid username and/or password
       </p>
       <form [formGroup]="form" novalidate>
@@ -19,18 +21,53 @@
             formControlName="username"
             required>
         </mat-form-field>
+        <mat-form-field *ngIf="registerContext">
+          <input
+            #emailField
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            required>
+        </mat-form-field>
+        <mat-form-field *ngIf="registerContext">
+          <input
+            #emailField2
+            matInput
+            placeholder="Re-type email"
+            required>
+        </mat-form-field>
         <mat-form-field>
           <input
+            #passwordField
             matInput
             type="password"
             placeholder="Password"
             formControlName="password"
             required>
         </mat-form-field>
+        <mat-form-field *ngIf="registerContext">
+          <input
+            #passwordField2
+            matInput
+            type="password"
+            placeholder="Re-type password"
+            required>
+        </mat-form-field>
       </form>
     </mat-card-content>
-    <mat-card-actions fxLayout="row" fxLayoutAlign="center">
-      <button mat-raised-button color="primary" (click)="login()">Login</button>
+    <mat-card-actions fxLayout="column" fxLayoutAlign="center center">
+      <button id="login-btn" mat-raised-button color="primary"
+        (click)="registerContext? register(): login()"
+        [innerHTML]="registerContext? 'REGISTER': 'LOGIN'">
+      </button>
+      <p>Or click&nbsp;
+        <span (click)="registerContext = !registerContext"
+          class="link">
+          here
+        </span>
+          to
+        <span [innerHTML]="registerContext? 'login':'register'"></span>
+      </p>
     </mat-card-actions>
   </mat-card>
 </div>

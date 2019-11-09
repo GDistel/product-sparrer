@@ -17,7 +17,7 @@ class TicketsViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return TicketsModel.objects.filter(owner=user)
+        return TicketsModel.objects.filter(owner=user).order_by('-id')
 
 
 class TicketsDeploymentViewSet(viewsets.ModelViewSet):

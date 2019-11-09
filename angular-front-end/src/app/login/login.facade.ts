@@ -22,6 +22,16 @@ export class LoginFacade{
     )
   }
 
+  register(newUser: User): void{
+    this.authService.register(newUser).subscribe(
+      data => console.log(data),
+      err => {
+        this.logout();
+        this.loginState.setCredentialsValidity(false)
+      }
+    )
+  }
+
   logout(): void {
     localStorage.removeItem('id_token');
     localStorage.removeItem('user');
