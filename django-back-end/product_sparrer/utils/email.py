@@ -1,4 +1,6 @@
 import os
+from django.core.mail import send_mail
+from django.conf import settings
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
@@ -15,3 +17,8 @@ def send_email(destinatary='product-sparrer@mailinator.com', subject=' ', body='
         print(response.status_code)
     except Exception as e:
         print(str(e))
+
+def send_gmail(destinatary='product-sparrer@mailinator.com', subject=' ', body='Empty'):
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [destinatary,]
+    send_mail( subject, body, email_from, recipient_list )

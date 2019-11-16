@@ -24,7 +24,7 @@ export class LoginFacade{
 
   register(newUser: User): void{
     this.authService.register(newUser).subscribe(
-      data => console.log(data),
+      data => console.log('Successful new user creation'),
       err => {
         this.logout();
         this.loginState.setCredentialsValidity(false)
@@ -57,4 +57,14 @@ export class LoginFacade{
     return this.loginState.areCredentialsValid$()
   }
 
+  verifyEmail(id: any): void{
+    this.authService.verifyEmail(id).subscribe(
+      data => this.loginState.setVerifiedEmail(data),
+      err => { this.logout(); console.log(err) }
+    )
+  }
+
+  isEmailVerified$(): Observable<any> {
+    return this.loginState.isEmailVerified$();
+  }
 }

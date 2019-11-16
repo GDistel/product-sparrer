@@ -7,11 +7,13 @@ import { LoginComponent } from './containers/login/login.component';
 import { AuthService } from './api/auth.service';
 import { LoginFacade } from './login.facade';
 import { CheckEmailComponent } from './components/check-email/check-email.component';
+import { VerifyEmailComponent } from './containers/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    CheckEmailComponent
+    CheckEmailComponent,
+    VerifyEmailComponent
   ],
   imports: [
     CommonModule,
