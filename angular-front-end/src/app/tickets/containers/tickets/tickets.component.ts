@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, TemplateRef, AfterViewInit } from '@angul
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { TicketsFacade } from '../../tickets.facade';
+import { LoginFacade } from 'src/app/login/login.facade';
 import { Ticket } from '../../models/ticket.model';
 import { ConfirmationPromptComponent } from 'src/app/shared/confirmation-prompt/confirmation-prompt.component';
 import { EditTicketComponent } from '../../components/edit-ticket/edit-ticket.component';
@@ -24,6 +25,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   constructor(
     private previousRouteService: PreviousRouteService,
     private ticketsFacade: TicketsFacade,
+    private loginFacade: LoginFacade,
     private dialog: MatDialog,
     private snackBarService: SnackBarService,
   ) {
@@ -60,7 +62,9 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   }
 
   deployTickets(): void{
-    const dialogRef = this.openDialog(DeployTicketsComponent);
+    let userEmail: string = this.loginFacade.getUser().email;
+    let destinataries: string[] = [userEmail];
+    const dialogRef = this.openDialog(DeployTicketsComponent, { emails: destinataries });
     dialogRef.afterClosed().subscribe(result => {
       if (result){
         this.ticketsFacade.deployTickets(result)

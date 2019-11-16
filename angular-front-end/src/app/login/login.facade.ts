@@ -14,7 +14,7 @@ export class LoginFacade{
 
   login(user: User): void{
     this.authService.login(user).subscribe(
-      data => this.setSession(data['token'], user),
+      data => this.setSession(data['token'], data['user']),
       err => {
         this.logout();
         this.loginState.setCredentialsValidity(false)
@@ -66,5 +66,9 @@ export class LoginFacade{
 
   isEmailVerified$(): Observable<any> {
     return this.loginState.isEmailVerified$();
+  }
+
+  getUser(): User{
+    return this.loginState.user
   }
 }

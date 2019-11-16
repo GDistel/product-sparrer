@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -17,7 +18,7 @@ class CustomObtainAuthToken(ObtainAuthToken):
             if user.verified_email:
                 response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
                 token = Token.objects.get(key=response.data['token'])
-                return Response({'token': token.key})
+                return Response( {'token': token.key, 'user': { 'username': user.username, 'email': user.email }} )
             else:
                 raise PermissionDenied({
                         "message": "The user\'s email address has not been verified"

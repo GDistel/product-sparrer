@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject, Optional } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { TESTEMAILS } from 'client_secrets';
 
 @Component({
   selector: 'app-deploy-tickets',
@@ -10,7 +9,7 @@ import { TESTEMAILS } from 'client_secrets';
 })
 export class DeployTicketsComponent implements OnInit {
   form: FormGroup;
-  emails = TESTEMAILS;
+  emails: string[];
 
   constructor(
     private dialogRef: MatDialogRef<DeployTicketsComponent>,
@@ -18,6 +17,9 @@ export class DeployTicketsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.data.emails?
+      this.emails = this.data.emails:
+      this.emails = [];
     if (this.emails){
       this.form = new FormGroup({
         destinatary: new FormControl(this.emails[0]),
