@@ -11,6 +11,8 @@ import { SnackBarService } from 'src/app/shared/snack-bar.service';
 })
 export class TicketDeploymentsComponent implements OnInit {
   @ViewChild('refreshToast', { static: false }) refreshToastRef: TemplateRef<any>;
+  @ViewChild('deploymentStartedToast', { static: false }) deploymentStartedToastRef: TemplateRef<any>;
+
   deployments$: Observable<Deployment[]>;
 
   constructor(
@@ -25,11 +27,15 @@ export class TicketDeploymentsComponent implements OnInit {
 
   refresh(): void{
     this.ticketsFacade.loadDeployments();
-    this.openSnackBar();
+    this.openSnackBar(this.refreshToastRef);
   }
 
-  openSnackBar(): void {
-    this.snackBarService.openSnackBar(this.refreshToastRef, 2000);
+  openSnackBar(toastRef: TemplateRef<any>): void {
+    this.snackBarService.openSnackBar(toastRef, 2000);
+  }
+
+  deploymentStarted(){
+    this.openSnackBar(this.deploymentStartedToastRef)
   }
 
 }

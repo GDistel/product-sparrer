@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { TicketsFacade } from '../../tickets.facade';
@@ -23,6 +24,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ["type", "status", "subject", "body", "actions"];
 
   constructor(
+    private router: Router,
     private previousRouteService: PreviousRouteService,
     private ticketsFacade: TicketsFacade,
     private loginFacade: LoginFacade,
@@ -67,7 +69,8 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     const dialogRef = this.openDialog(DeployTicketsComponent, { emails: destinataries });
     dialogRef.afterClosed().subscribe(result => {
       if (result){
-        this.ticketsFacade.deployTickets(result)
+        this.ticketsFacade.deployTickets(result);
+        this.router.navigate(['tickets/deployments']);       
       }
     });
   }
