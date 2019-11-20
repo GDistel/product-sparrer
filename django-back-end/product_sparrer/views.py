@@ -9,7 +9,7 @@ from rest_framework.exceptions import PermissionDenied
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'index.html')
 
 class CustomObtainAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):

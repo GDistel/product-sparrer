@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { Ticket } from '../models/ticket.model';
 import { Deployment } from '../models/deployment.model';
 import { LoginState } from '../../login/state/login.state';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable()
 export class TicketsService {
-  private serviceUrl = 'http://127.0.0.1:8000/api/';
+  private serviceUrl = environment.apiUrl + 'api/';
 
   constructor(
     private http: HttpClient,

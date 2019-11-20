@@ -3,10 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { ADMIN_TOKEN } from 'client_secrets';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
-  private serviceUrl = 'http://127.0.0.1:8000/';
+  private serviceUrl = environment.apiUrl;
 
   httpHeaders = new HttpHeaders({
     'Content-type': 'application/json',

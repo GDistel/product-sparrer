@@ -11,7 +11,7 @@ const routes: Routes = [
     canActivate: [LoggedInGuard]
   },
   {
-    path: 'verify-email/:id',
+    path: 'email-verification/:id',
     component: VerifyEmailComponent,
   },
 ];

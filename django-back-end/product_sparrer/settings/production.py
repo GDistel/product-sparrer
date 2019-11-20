@@ -10,6 +10,12 @@ ALLOWED_HOSTS = [
     'product-sparrer.herokuapp.com',
 ]
 
+REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = ('rest_framework.authentication.TokenAuthentication',)
+
+CORS_ORIGIN_WHITELIST = (
+    'https://product-sparrer.herokuapp.com',
+)
+
 DEBUG = False
 SECURE_SSL_REDIRECT = True
 CSRF_COOKIE_SECURE = True

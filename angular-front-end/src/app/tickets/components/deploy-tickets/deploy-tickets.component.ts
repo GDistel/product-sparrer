@@ -27,7 +27,7 @@ export class DeployTicketsComponent implements OnInit {
     }
   }
 
-  private cancel(){
+  cancel(){
     this.dialogRef.close()
   }
 

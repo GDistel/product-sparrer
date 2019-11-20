@@ -40,7 +40,7 @@ export class EditTicketComponent implements OnInit {
     }
   }
 
-  private cancel(){
+  cancel(){
     this.dialogRef.close()
   }
 

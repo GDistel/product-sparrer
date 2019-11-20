@@ -20,6 +20,7 @@ export class VerifyEmailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log('Active email-verification route');
     this.id = this.route.snapshot.params['id'];
     this.isLoggedIn(),
     this.loginFacade.isEmailVerified$().subscribe(

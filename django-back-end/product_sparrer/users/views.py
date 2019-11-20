@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 from .models import CustomUser
 from product_sparrer.utils.email import send_gmail
 
-url = str(os.environ.get('HOST_URL')) + '/verify-email/{0}'
+url = str(os.environ.get('HOST_URL')) + '/email-verification/{0}'
 verification_email = '''Thank you for registering to Product-Sparrer.
                         Please click in the following link to validate your account: {0}'''
 

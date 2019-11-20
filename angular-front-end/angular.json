@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "deployUrl": "/static/front_end/",
             "outputPath": "../django-back-end/product_sparrer/static/front_end",
             "index": "src/index.html",
             "main": "src/main.ts",
