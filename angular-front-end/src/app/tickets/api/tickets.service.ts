@@ -43,7 +43,7 @@ export class TicketsService {
 
   deleteTicket(id: number): Observable<any> {
     return this.http.delete(
-      this.serviceUrl + 'tickets/' + id, {headers: this.getHeaders()}
+      this.serviceUrl + 'tickets/' + id + '/', {headers: this.getHeaders()}
     )
   }
 
