@@ -1,0 +1,6 @@
+#Django .gitignore below
+db.sqlite3
+__pycache__
+geckodriver.log
+migrations
+*.pyc
