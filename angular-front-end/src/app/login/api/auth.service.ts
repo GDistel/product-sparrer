@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
-import { ADMIN_TOKEN } from 'client_secrets';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -11,7 +10,7 @@ export class AuthService {
 
   httpHeaders = new HttpHeaders({
     'Content-type': 'application/json',
-    'Authorization': ADMIN_TOKEN
+    'Authorization': environment.systemToken
   });
 
   constructor(private http: HttpClient) { }
