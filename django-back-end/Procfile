@@ -1,2 +1,2 @@
 web: gunicorn product_sparrer.wsgi --log-file -
-main_worker: celery -A product_sparrer worker -l info -E --beat --without-gossip --without-mingle --without-heartbeat
+main_worker: celery -A product_sparrer worker -l info --concurrency 2 --without-gossip --without-mingle --without-heartbeat
