@@ -10,6 +10,10 @@ ALLOWED_HOSTS = [
     'product-sparrer.herokuapp.com',
 ]
 
+BROKER_URL = os.environ.get('CLOUDAMQP_URL', '')
+BROKER_POOL_LIMIT = 1
+BROKER_HEARTBEAT = None
+BROKER_CONNECTION_TIMEOUT = 30
 CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL')
 CELERY_BROKER_POOL_LIMIT = 1
 CELERY_BROKER_HEARTBEAT = None # We're using TCP keep-alive instead
