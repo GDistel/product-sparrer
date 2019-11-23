@@ -1,10 +1,19 @@
 <app-top-nav></app-top-nav>
 
-<button mat-fab class="create-button" (click)="createTicket()">
+<button
+  mat-fab
+  matTooltip="Create ticket"
+  class="create-button"
+  (click)="createTicket()">
   <mat-icon>add</mat-icon>
 </button>
 
-<button mat-fab class="deploy-button" (click)="deployTickets()" color="warn">
+<button
+  mat-fab
+  matTooltip="Deploy all tickets"
+  class="deploy-button"
+  (click)="deployTickets()"
+  color="warn">
   <mat-icon>email</mat-icon>
 </button>
 

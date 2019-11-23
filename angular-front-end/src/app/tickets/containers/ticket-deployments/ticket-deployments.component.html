@@ -12,7 +12,11 @@
     </mat-card-header>
     <mat-card-content>
       <div fxLayout="row" fxLayoutAlign="end">
-        <button mat-mini-fab color="primary" (click)="refresh()">
+        <button
+          mat-mini-fab
+          matTooltip="Refresh deployments"
+          color="primary"
+          (click)="refresh()">
           <mat-icon>refresh</mat-icon>
         </button>
       </div>
