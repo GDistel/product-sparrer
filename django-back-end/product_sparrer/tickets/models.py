@@ -19,7 +19,7 @@ class TicketsModel(models.Model):
     owner = models.ForeignKey(AUTH_USER_MODEL, related_name='tickets', on_delete=models.CASCADE)
     type = models.CharField(max_length=20, unique=False, choices=TICKET_TYPE)
     status = models.CharField(max_length=10, unique=False, choices=TICKET_STATUS)
-    subject = models.CharField(max_length=20, unique=False, blank=False, help_text="e.g. Academy Ticket 'S8'")
+    subject = models.CharField(max_length=254, unique=False, blank=False, help_text="e.g. Academy Ticket 'S8'")
     body = models.TextField(max_length=1000, unique=False, blank=False, db_index=False)
 
     def __str__(self):
