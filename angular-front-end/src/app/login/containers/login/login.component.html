@@ -20,7 +20,7 @@
             placeholder="Username"
             formControlName="username"
             required>
-          <mat-error>
+          <mat-error *ngIf="registerContext">
             Less than 20 characters
           </mat-error>
         </mat-form-field>
@@ -43,7 +43,7 @@
             placeholder="Password"
             formControlName="password"
             required>
-          <mat-error>
+          <mat-error *ngIf="registerContext">
             At least 8 characters in length
           </mat-error>
         </mat-form-field>

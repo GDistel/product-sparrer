@@ -25,11 +25,10 @@ export class VerifyEmailComponent implements OnInit {
     this.isLoggedIn(),
     this.loginFacade.isEmailVerified$().subscribe(
       user => {
-        console.log(user)
         this.emailVerified = user['verified_email'];
         this.emailVerified?
           this.loginFacade.login(user):
-          null
+          console.log('Email verification failed');
     });
     this.loginFacade.verifyEmail(this.id);
   }
