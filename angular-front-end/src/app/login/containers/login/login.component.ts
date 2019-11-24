@@ -1,12 +1,28 @@
 import { Component, OnInit, AfterViewInit, ViewChild, TemplateRef } from '@angular/core';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, ValidatorFn, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { LoginFacade } from '../../login.facade';
 import { User } from '../../models/user.model';
 import { PreviousRouteService } from 'src/app/core/previous-route.service';
 import { SnackBarService } from 'src/app/shared/snack-bar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CheckEmailComponent } from '../../components/check-email/check-email.component';
+
+export const equalValueValidator: ValidatorFn = (fg: FormGroup) => {
+  const password = fg.get('password').value;
+  const confirmPassword = fg.get('confirmPassword').value;
+  return (password !== null) && (confirmPassword !== null) && (password === confirmPassword)
+    ? null
+    : { passwordsMatch: true };
+};
+
+export class CustomErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const passordsMatch = !form.hasError('passwordsMatch')
+    return !passordsMatch && (control.touched || control.dirty);
+  }
+}
 
 @Component({
   selector: 'app-login',
@@ -20,6 +36,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   validCredentials: boolean;
   registerContext: boolean = false;
   userExists: boolean = false;
+  matcher = new CustomErrorStateMatcher();
 
   constructor(
     private previousRouteService: PreviousRouteService,
@@ -31,10 +48,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      username: new FormControl(),
-      email: new FormControl(),
-      password: new FormControl(),
-    }),
+      username: new FormControl('', Validators.maxLength(20)),
+      email: new FormControl('', Validators.pattern("[^ @]*@[^ @]*")),
+      password: new FormControl('', Validators.minLength(8)),
+      confirmPassword: new FormControl(),
+    }, equalValueValidator),
     this.isLoggedIn(),
     this.checkCredentials()
   }
@@ -53,8 +71,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     return dialogRef
   }
 
-  checkEmail(): void{
-    const dialogRef = this.openDialog(CheckEmailComponent);
+  checkEmail(email: string): void{
+    const dialogRef = this.openDialog(CheckEmailComponent, { email: email });
     dialogRef.afterClosed().subscribe( _  => { this.registerContext = false });
   }
 
@@ -65,11 +83,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   register(): void{
     let newUser: User = this.form.value;
-    this.loginFacade.login(newUser);
-    if (!this.loggedIn){
+    if (!this.loggedIn && this.form.valid){
       this.loginFacade.register(newUser);
       this.form.reset();
-      this.checkEmail();
+      this.checkEmail(newUser.email);
     }
   }
 

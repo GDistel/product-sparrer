@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from "@angular/material";
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 
 @Component({
@@ -11,9 +11,11 @@ export class CheckEmailComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<CheckEmailComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   ngOnInit() {
+    console.log(this.data.email)
   }
 
   close(): void{

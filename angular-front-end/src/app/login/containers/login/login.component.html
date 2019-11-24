@@ -20,6 +20,9 @@
             placeholder="Username"
             formControlName="username"
             required>
+          <mat-error>
+            Less than 20 characters
+          </mat-error>
         </mat-form-field>
         <mat-form-field *ngIf="registerContext">
           <input
@@ -28,13 +31,9 @@
             placeholder="Email"
             formControlName="email"
             required>
-        </mat-form-field>
-        <mat-form-field *ngIf="registerContext">
-          <input
-            #emailField2
-            matInput
-            placeholder="Re-type email"
-            required>
+          <mat-error>
+            Not a valid email format
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -44,14 +43,22 @@
             placeholder="Password"
             formControlName="password"
             required>
+          <mat-error>
+            At least 8 characters in length
+          </mat-error>
         </mat-form-field>
         <mat-form-field *ngIf="registerContext">
           <input
-            #passwordField2
+            #confirmPasswordField
             matInput
             type="password"
             placeholder="Re-type password"
+            formControlName="confirmPassword"
+            [errorStateMatcher]="matcher"
             required>
+          <mat-error>
+            It must match the 'password' field
+          </mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>
