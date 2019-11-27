@@ -24,7 +24,7 @@ export class LoginFacade{
 
   register(newUser: User): void{
     this.authService.register(newUser).subscribe(
-      data => console.log('Successful new user creation'),
+      data => console.log('Requested user creation'),
       err => {
         this.logout();
         this.loginState.setCredentialsValidity(false)

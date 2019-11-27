@@ -1,2 +1,6 @@
-<p *ngIf="emailVerified">Your email has been verified. You can now login with your credentials</p>
-<p *ngIf="!emailVerified">Error: email verification was not successful</p>
+<div class="verify-email-wrapper">
+  <p *ngIf="emailVerified">Your email has been verified. You can now login with your credentials.</p>
+  <p *ngIf="!emailVerified" style="color: red;">Error: email verification was not successful</p>
+  <br>
+  <button mat-raised-button color="primary" routerLink="/">GO TO LOGIN</button>
+</div>

@@ -15,7 +15,6 @@ export class CheckEmailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.data.email)
   }
 
   close(): void{
