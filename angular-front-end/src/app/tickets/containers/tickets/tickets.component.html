@@ -56,6 +56,11 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
+  <p *ngIf="dataLength === 0">
+    You have not created any tickets yet.
+    Click on the 'add' button on your right to create the first one.
+  </p>
+
   <mat-paginator
     [length]="dataLength"
     [pageSize]="10"
