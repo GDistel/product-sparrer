@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 
 @Component({
@@ -27,14 +27,14 @@ export class EditTicketComponent implements OnInit {
       this.form = new FormGroup({
         type: new FormControl(ticket.type),
         status: new FormControl(ticket.status),
-        subject: new FormControl(ticket.subject),
+        subject: new FormControl(ticket.subject, Validators.maxLength(20)),
         body: new FormControl(ticket.body),
       })
     } else {
       this.form = new FormGroup({
         type: new FormControl(),
         status: new FormControl(),
-        subject: new FormControl(),
+        subject: new FormControl('', Validators.maxLength(20)),
         body: new FormControl(),
       })
     }
