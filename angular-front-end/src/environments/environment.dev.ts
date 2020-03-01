@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   apiUrl: 'http://127.0.0.1:8000/',
-  systemToken: 'Token 8c7fef4d20a0721543c8427ddf0c829b7477d37a'
+  systemToken: 'Token 2c1add0f13a9dbc7edb7ea184565029ad6129eca'
 };
