@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 from product_sparrer.users.serializers import UserSerializer
 from django.contrib.auth.hashers import make_password
 from .models import CustomUser
-from product_sparrer.utils.email import send_gmail
+from product_sparrer.utils import email
 
 url = str(os.environ.get('HOST_URL')) + '/email-verification/{0}'
 verification_email = '''Thank you for registering to Product-Sparrer.
@@ -17,7 +17,7 @@ class UsersViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(password=make_password(self.request.data.get('password')))
         user = CustomUser.objects.get(username = self.request.data.get('username'))
-        send_gmail(
+        email.send_email(
             destinatary = user.email,
             subject = 'Product-Sparrer: Please validate your account',
             body = verification_email.format(url.format(user.id)))
