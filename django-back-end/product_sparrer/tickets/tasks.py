@@ -15,7 +15,7 @@ def deploy_tickets(owner_email, destinatary):
 
     for counter,ticket in enumerate(all_tickets):
         try:
-            email.send_gmail(destinatary=destinatary, subject=ticket.subject, body=ticket.body)
+            email.send_email(destinatary=destinatary, subject=ticket.subject, body=ticket.body)
             sent_tickets = '{} out of {}'.format(counter + 1, len(all_tickets))
             print(sent_tickets + ' tickets have been sent.')
             time.sleep(random.randint(2,5))
